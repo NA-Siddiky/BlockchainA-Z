@@ -61,8 +61,8 @@ class Blockchain:
             return True
 
 
-name = input("Name: ")
-print("Hello", name)
+# name = input("Name: ")
+# print("Hello", name)
 
 
 app = Flask(__name__)
