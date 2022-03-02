@@ -61,28 +61,13 @@ class Blockchain:
             return True
 
 
-# name = input("Name: ")
-# print("Hello", name)
+# Part 2 - Mining our Blockchain
 
-
+# Creating a Web App
 app = Flask(__name__)
 
+# Creating a Blockchain
 blockchain = Blockchain()
-
-
-@app.route('/login', methods=['GET'])
-def mine_block():
-    previous_block = blockchain.get_previous_block()
-    previous_proof = previous_block['proof']
-    proof = blockchain.proof_of_work(previous_block)
-    previous_hash = blockchain.hash(previous_block)
-    block = blockchain.create_block(proof, previous_hash)
-    response = {'message': 'Congratulations, you just mined a block!',
-                'index': block['index'],
-                'timestamp': block['timestamp'],
-                'proof': block['proof'],
-                'previous_hash': block['previous_hash']}
-    return jsonify(response), 200
 
 # Mining a new block
 
@@ -107,11 +92,10 @@ def mine_block():
 @app.route('/get_chain', methods=['GET'])
 def get_chain():
     response = {'chain': blockchain.chain,
-                'length': len(blockchain.chain)
-                }
+                'length': len(blockchain.chain)}
     return jsonify(response), 200
 
-# checking valedation
+# Checking if the Blockchain is valid
 
 
 @app.route('/is_valid', methods=['GET'])
@@ -125,4 +109,5 @@ def is_valid():
     return jsonify(response), 200
 
 
+# Running the app
 app.run(host='0.0.0.0', port=5000)
